@@ -89,7 +89,7 @@ app.get('/auth/logout', logoutController)
 //save data to mongoDB
 app.post('/posts/store', storeController)
 
-// ===== 新增路由 =====
+// ===== new route =====
 //admin
 app.get('/admin', adminMiddleware, adminController);
 app.post('/admin/store', adminMiddleware, adminStoreController);

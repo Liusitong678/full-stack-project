@@ -2,7 +2,7 @@ const DriverInfo = require('../models/DriverInfo')
 const Appointment = require('../models/Appointment')
 const bcrypt = require('bcrypt') // ensure bcrypt is required if not already
 
-module.exports =  async (req, res) => {
+module.exports = async (req, res) => {
     try {
         const { username, password } = req.body
         const user = await DriverInfo.findOne({ username: username })
@@ -10,18 +10,18 @@ module.exports =  async (req, res) => {
         if (user) {
             console.log("user-------", user)
             console.log("AppointmentId----", user.AppointmentId);
-            
-            // 默认 appointmentInfo 为空
+
+            // 默认 appointmentInfo 为空 Default appointmentInfo is empty
             let appointmentInfo = { _id: null, date: null, time: null };
 
-            // 如果用户已有 AppointmentId，则查询对应预约记录
+            // 如果用户已有 AppointmentId，则查询对应预约记录 If the user already has an AppointmentId, query the corresponding appointment record
             if (user.AppointmentId) {
                 const existAppointment = await Appointment.findById(user.AppointmentId);
                 if (existAppointment) {
-                appointmentInfo = existAppointment;
+                    appointmentInfo = existAppointment;
                 }
             }
-            
+
             bcrypt.compare(password, user.password, (err, same) => {
                 if (err) {
                     console.log(err)
@@ -63,6 +63,6 @@ module.exports =  async (req, res) => {
 
         req.flash('validationErrors', validationErrors);
         req.flash('data', req.body); // Preserve input data
-        res.redirect('/auth/login') 
+        res.redirect('/auth/login')
     }
 }
