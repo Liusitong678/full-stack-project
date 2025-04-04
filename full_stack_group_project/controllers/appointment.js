@@ -1,5 +1,4 @@
 const Appointment = require('../models/Appointment');
-const DriverInfo = require('../models/DriverInfo');
 
 module.exports = async (req, res) => {
     const { date } = req.query;

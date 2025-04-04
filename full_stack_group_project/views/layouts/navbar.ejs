@@ -19,6 +19,10 @@
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/admin">Appointment</a></li>
                 <% } %>
 
+                <% if(isExaminer) { %>  
+                    <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/examiner">Examiner</a></li>
+                <% } %>
+
                 <% if(loggedIn) { %>
                 <li class="nav-item"><a class="nav-link px-lg-3 py-3 py-lg-4" href="/auth/logout">LOGOUT</a></li>
                 <% } %>

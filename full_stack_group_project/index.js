@@ -20,15 +20,20 @@ const loginController = require('./controllers/login.js')
 const loginUserController = require('./controllers/loginUser.js')
 //logout
 const logoutController = require('./controllers/logout.js')
+
 // new controller
 const appointmentController = require('./controllers/appointment');
 const adminController = require('./controllers/admin');
 const adminStoreController = require('./controllers/adminStore');
 
+//examiner
+const examinerController = require('./controllers/examiner.js')
+
 //Custom Middlewares
 const validateMiddleware = require('./middlewares/validateMiddleware')
 const authMiddleware = require('./middlewares/authMiddleware.js')
 const adminMiddleware = require('./middlewares/adminMiddleware.js');
+const examinerMiddleware = require('./middlewares/examinerMiddleware.js')
 
 //initializing express app
 const app = new express()
@@ -55,11 +60,13 @@ app.use(expressSession({
 global.loggedIn = null
 global.isDriver = null
 global.isAdmin = null
+global.isExaminer = null
 
 app.use("*", (req,res,next) => {
     loggedIn = req.session.userId;
     isDriver = req.session.userType == 'Driver';
     isAdmin = req.session.userType == "Admin";
+    isExaminer = req.session.userType == 'Examiner';
     next()
 })
 
@@ -96,6 +103,9 @@ app.post('/admin/store', adminMiddleware, adminStoreController);
 
 // Admin - View Appointment Page
 app.get('/appointment', appointmentController);
+
+//examiner
+app.get('/examiner', examinerMiddleware, examinerController)
 
 //not found
 app.use((req,res) => res.render('notfound'))
