@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Drive test</title>
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+        rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Navigation-->
+    <%- include('layouts/navbar'); -%>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('img/test-bg.jpg')"></header>
+        <!-- Main Content-->
+        <div class="testForm">
+            <% if (messages && messages.success.length > 0) { %>
+                <div class="alert alert-success" ><%= messages.success %></div>
+            <% } %>
+            
+            <% if (messages && messages.error.length > 0) { %>
+                <div class="alert alert-danger"><%= messages.error %></div>
+            <% } %>
+            <h1>G2 Test</h1>
+            <form id="g2Form" action="/posts/store" method="POST">
+                <fieldset>
+                    <legend>Personal Information</legend>
+                    <label for="firstname">First Name:</label>
+                    <input type="text" id="firstname" name="firstname" placeholder="Enter your first name"
+                        value="<%= userInfo.firstname !== 'default' ? userInfo.firstname : '' %>" 
+                        <%=userInfo.firstname !=='default' ? 'disabled' : '' %> required>
+
+                    <label for="lastname">Last Name:</label>
+                    <input type="text" id="lastname" name="lastname" placeholder="Enter your last name"
+                        value="<%= userInfo.lastname !== 'default' ? userInfo.lastname : '' %>" 
+                        <%=userInfo.lastname !=='default' ? 'disabled' : '' %> required>
+
+                    <label for="LicenseNo">License Number:</label>
+                    <input type="text" id="LicenseNo" name="LicenseNo" maxlength="8"
+                        placeholder="8-character license number"
+                        value="<%= userInfo.LicenseNo !== 'default' ? userInfo.LicenseNo : '' %>" 
+                        <%=userInfo.LicenseNo !=='default' ? 'disabled' : '' %> required>
+
+                    <label for="age">Age:</label>
+                    <input type="number" id="age" name="age" min="16" placeholder="Enter your Age"
+                        value="<%= userInfo.age !== 0 ? userInfo.age : '' %>" 
+                        <%= userInfo.age && userInfo.age !== 0 ? 'disabled' : '' %> required>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Car Information</legend>
+                    <label for="make">Car Make:</label>
+                    <input type="text" id="make" name="make" placeholder="Enter car make"
+                        value="<%= userInfo.car_details.make !== 'default' ? userInfo.car_details.make : '' %>"
+                        required>
+
+                    <label for="model">Car Model:</label>
+                    <input type="text" id="model" name="model" placeholder="Enter car model"
+                        value="<%= userInfo.car_details.model !== 'default' ? userInfo.car_details.model : '' %>"
+                        required>
+
+                    <label for="year">Year:</label>
+                    <input type="number" id="year" name="year" min="0" placeholder="Enter year of manufacture"
+                        value="<%= userInfo.car_details.year !== '0' ? userInfo.car_details.year : '' %>" required>
+
+                    <label for="platno">Plate Number:</label>
+                    <input type="text" id="platno" name="platno" placeholder="Enter plate number"
+                        value="<%= userInfo.car_details.platno !== 'default' ? userInfo.car_details.platno : '' %>"
+                        required>
+                </fieldset>
+
+                <button type="submit" class="formButton">Submit</button>
+            
+            <br>
+            <% if (userInfo.LicenseNo !=='default') { %>
+                <fieldset>
+                    <div class="form-group">
+                        <legend>Appointment Information</legend>
+                        <!-- 隐藏字段用于存储 AppointmentId -->
+
+                        <input type="hidden" id="AppointmentId" name="AppointmentId" value="<%= appointmentInfo._id %>" style="display: none;"/>
+                        <label for="date">Date:</label>
+                        <input type="date" name="date" id="date" class="form-control" 
+                            value="<%= appointmentInfo.date %>" required 
+                            <%= appointmentInfo.date ? 'disabled' : '' %> />
+                        
+                        <label for="time">Selected Time:</label>
+                        <% if (appointmentInfo.time) { %>
+                            <input type="text" class="form-control" id="time" name="time" value="<%= appointmentInfo.time %>" disabled/>
+                        <% } %>
+                        <div id="timeButtons" class="form-group">
+                            <!-- 时间槽按钮由前端 JS 动态生成 -->
+                        </div>
+                    </div>
+                    <br>
+                    <button type="submit" class="formButton" style="width: 100%;">Send</button>
+                </fieldset>
+            <% } %>
+            </form>
+        </div>
+        <!-- Footer-->
+        <%- include('layouts/footer'); -%>
+        <!-- script-->
+        <%- include('layouts/scripts'); -%>
+</body>
+
+</html>

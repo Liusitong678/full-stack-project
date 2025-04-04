@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Drive test</title>
+        <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <%- include('layouts/navbar'); -%>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('/img/test-bg.jpg')"></header>
+        
+        <!-- Main Content-->
+        <div class="testForm">
+            <% if (messages && messages.success.length > 0 ) { %>
+                <div class="alert alert-success"><%= messages.success %></div>
+            <% } %>
+            
+            <% if (messages && messages.error.length > 0) { %>
+                <div class="alert alert-danger"><%= messages.error %></div>
+            <% } %>
+            
+            <h1>G Test</h1>
+            <div id="result">
+                <% if (isNewUser) { %>
+                    <h2>License Information</h2>
+                    <p>Please enter your details in <a href="/G2">G2 page</a> first.</p>
+                <% } else { %>
+                    <h3>user Information:</h3>
+                    <p><strong>Name:</strong> <%= userInfo.firstname %> <%= userInfo.lastname %></p>
+                    <p><strong>Age:</strong> <%= userInfo.age %></p>
+                    <p><strong>License No:</strong> <%= userInfo.LicenseNo %></p>
+                    <h3>Car Details:</h3>
+                    <form action="/posts/store" method="POST">
+                        <input type="hidden" name="LicenseNo" value="<%= userInfo.LicenseNo %>">
+                        <label for="make">Car Make:</label>
+                        <input type="text" id="make" name="make" value="<%= userInfo.car_details.make %>" required>
+                    
+                        <label for="model">Car Model:</label>
+                        <input type="text" id="model" name="model"  value="<%= userInfo.car_details.model %>" required>
+                    
+                        <label for="year">Car Year:</label>
+                        <input type="text" id="year" name="year" min="0" value="<%= userInfo.car_details.year %>" required>
+                    
+                        <label for="platno">Car License Plate Number:</label>
+                        <input type="text" id="platno" name="platno"  value="<%= userInfo.car_details.platno %>" required>
+                    
+                        <button type="submit" class="formButton">Update Car Info</button>
+                    </form>
+                <% } %>
+            </div>
+        </div>
+        <!-- Footer-->
+        <%- include('layouts/footer'); -%>
+        <!-- script-->
+        <%- include('layouts/scripts'); -%>
+        
+    </body>
+</html>
