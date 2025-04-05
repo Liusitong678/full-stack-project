@@ -11,10 +11,21 @@ const DriverInfoSchema = new Schema({
     lastname: { type: String, default: "default" },
     LicenseNo: { type: String, default: "default" },
     age: { type: Number, default: 0 },
-    AppointmentId: {
+    TestType: { type: String, enum: ['G', 'G2']}, //enum:可选，限制为这两种
+    // AppointmentId: {
+    //     type: mongoose.Schema.Types.ObjectId,
+    //     ref: 'Appointment',
+    // },
+    GAppointmentId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Appointment',
-    },
+        default: null
+      },
+      G2AppointmentId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Appointment',
+        default: null
+      },
     car_details: {
         make: { type: String, default: "default" },
         model: { type: String, default: "default" },

@@ -13,6 +13,7 @@ const gPageController = require('./controllers/gPage.js')
 const gSearchController = require('./controllers/gSearch.js')
 const g2PageController = require('./controllers/g2Page.js')
 const storeController = require('./controllers/store.js')
+
 //sign up and login 
 const newUserController = require('./controllers/newUser.js')
 const storeUserController = require('./controllers/storeUser.js')
@@ -104,7 +105,7 @@ app.post('/admin/store', adminMiddleware, adminStoreController);
 // Admin - View Appointment Page
 app.get('/appointment', appointmentController);
 
-//examiner
+//examiner /examiner/view
 app.get('/examiner', examinerMiddleware, examinerController)
 
 //not found
