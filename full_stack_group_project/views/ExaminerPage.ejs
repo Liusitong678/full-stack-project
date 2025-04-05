@@ -32,63 +32,61 @@
         <header class="masthead" style="background-image: url('img/examiner-bg.jpg')"></header>
         <!-- Main Content-->
         <div class="testForm">
-            <h1>Create Appointment Slots</h1>
-            <fieldset>
-                <!-- Test Type Selector -->
-                <form method="GET" action="/examiner" id="testTypeForm" style="margin-bottom: 20px;">
-                    <label for="testType">Select Test Type:</label>
-                    <select id="testType" name="type">
-                        <option value="G2">G2</option>
-                        <option value="G">G</option>
-                    </select>
+            <h1>Examiner Page</h1>
+            <!-- Test Type Selector -->
+            <form method="GET" action="/examiner" id="testTypeForm" style="margin-bottom: 20px;">
+                <label for="testType">Select Test Type:</label>
+                <select id="testType" name="type">
+                    <option value="G2">G2</option>
+                    <option value="G">G</option>
+                </select>
 
-                    <button type="submit" class="btn btn-primary">Show Appointments</button>
-                </form>
+                <button type="submit" class="btn btn-primary">Show Appointments</button>
+            </form>
 
-                <!-- 驾驶员信息表格 -->
-                <% if (drivers && drivers.length> 0) { %>
-                    <table class="table">
-                        <thead>
+            <!-- 驾驶员信息表格 -->
+            <% if (drivers && drivers.length> 0) { %>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>License No</th>
+                            <th>Test Type</th>
+                            <th>Appointment Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% drivers.forEach(driver=> { %>
                             <tr>
-                                <th>Name</th>
-                                <th>License No</th>
-                                <th>Test Type</th>
-                                <th>Appointment Time</th>
+                                <td>
+                                    <%= driver.firstname %>
+                                        <%= driver.lastname %>
+                                </td>
+                                <td>
+                                    <%= driver.LicenseNo %>
+                                </td>
+                                <td>
+                                    <%= driver.TestType %>
+                                </td>
+                                <td>
+                                    <% if (driver.TestType==='G2' && driver.G2AppointmentId) { %>
+                                        <%= driver.G2AppointmentId.time %> on <%= driver.G2AppointmentId.date %>
+                                                <% } else if (driver.TestType==='G' && driver.GAppointmentId) { %>
+                                                    <%= driver.GAppointmentId.time %> on <%= driver.GAppointmentId.date
+                                                            %>
+                                                            <% } else { %>
+                                                                Not booked
+                                                                <% } %>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <% drivers.forEach(driver=> { %>
-                                <tr>
-                                    <td>
-                                        <%= driver.firstname %>
-                                            <%= driver.lastname %>
-                                    </td>
-                                    <td>
-                                        <%= driver.LicenseNo %>
-                                    </td>
-                                    <td>
-                                        <%= driver.TestType %>
-                                    </td>
-                                    <td>
-                                        <% if (driver.TestType==='G2' && driver.G2AppointmentId) { %>
-                                            <%= driver.G2AppointmentId.time %> on <%= driver.G2AppointmentId.date %>
-                                                    <% } else if (driver.TestType==='G' && driver.GAppointmentId) { %>
-                                                        <%= driver.GAppointmentId.time %> on <%=
-                                                                driver.GAppointmentId.date %>
-                                                                <% } else { %>
-                                                                    Not booked
-                                                                    <% } %>
-                                    </td>
-                                </tr>
-                                <% }) %>
-                        </tbody>
-                    </table>
-                    <% } else { %>
-                        <p>No drivers found for the selected test type.</p>
-                        <% } %>
+                            <% }) %>
+                    </tbody>
+                </table>
+                <% } else { %>
+                    <p>No drivers found for the selected test type.</p>
+                    <% } %>
 
 
-            </fieldset>
         </div>
         <!-- Footer-->
         <%- include('layouts/footer'); -%>
