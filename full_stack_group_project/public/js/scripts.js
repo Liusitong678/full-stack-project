@@ -147,6 +147,20 @@ const queryTimeSlot = () => {
     })
 };
 
+function toggleForm(driverId) {
+    const formElement = document.getElementById('form-' + driverId);
+    if (formElement.style.display === 'block') {
+        formElement.style.display = 'none';
+    } else {
+        // Hide all other forms first
+        document.querySelectorAll('.hidden-form').forEach(form => {
+            form.style.display = 'none';
+        });
+        // Show the selected form
+        formElement.style.display = 'block';
+    }
+}
+
 $(document).ready(() => {
 
     datePicker();

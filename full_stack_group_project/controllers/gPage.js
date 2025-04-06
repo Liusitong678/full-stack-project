@@ -5,10 +5,10 @@ module.exports = async (req, res) => {
     try {
         const user = await DriverInfo.findById(req.session.userId);
         // const selectedAppointment = await Appointment.findById(user.AppointmentId); // ✅ 读取当前用户已预约的时间
-        const selectedAppointment = await Appointment.findById(user.GAppointmentId);
+        const selectedAppointment = await Appointment.findById(user.G2AppointmentId); // ✅ 读取当前用户已预约的时间
         const appointments = await Appointment.find({
             isTimeSlotAvailable: true,
-            TestType: 'G' // ✅ 只查 G 的预约时间
+            TestType: 'G2' // ✅ 只查 G 的预约时间
           });
           
 

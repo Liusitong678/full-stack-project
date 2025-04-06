@@ -10,6 +10,8 @@ const DriverInfoSchema = new Schema({
     firstname: { type: String, default: "default" },
     lastname: { type: String, default: "default" },
     LicenseNo: { type: String, default: "default" },
+    testComment: { type: String, default: "default" },
+    testPassed: { type: Boolean, default: false }, 
     age: { type: Number, default: 0 },
     TestType: { type: String, enum: ['G', 'G2']}, //enum:可选，限制为这两种
     // AppointmentId: {

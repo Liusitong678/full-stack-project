@@ -29,6 +29,8 @@ const adminStoreController = require('./controllers/adminStore');
 
 //examiner
 const examinerController = require('./controllers/examiner.js')
+const updateExaminationResult = require('./controllers/updateExaminationResult.js') 
+
 
 //Custom Middlewares
 const validateMiddleware = require('./middlewares/validateMiddleware')
@@ -72,7 +74,7 @@ app.use("*", (req,res,next) => {
 })
 
 //conntction to MongoDB
-mongoose.connect('mongodb+srv://admin:admin@cluster0.cbslt.mongodb.net/drive_test?retryWrites=true&w=majority&appName=Cluster0')
+mongoose.connect('mongodb+srv://admin:admin@greeshmacluster.l5bhd.mongodb.net/driving_app_db?retryWrites=true&w=majority&appName=GreeshmaCluster')
 
 //request handlers(get, post, put)
 app.get('/', dashboardController)
@@ -106,7 +108,9 @@ app.post('/admin/store', adminMiddleware, adminStoreController);
 app.get('/appointment', appointmentController);
 
 //examiner /examiner/view
-app.get('/examiner', examinerMiddleware, examinerController)
+app.get('/examiner', examinerMiddleware, examinerController);
+app.post('/examiner/updateResult/:driverId',  examinerMiddleware, updateExaminationResult);
+
 
 //not found
 app.use((req,res) => res.render('notfound'))

@@ -20,9 +20,18 @@
     <link href="css/styles.css" rel="stylesheet" />
 </head>
 <style>
-    .app_redio input {
-        width: 20px;
-    }
+     .app_redio input {
+            width: 20px;
+        }
+        .hidden-form {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-left: 4px solid #007bff;
+            display: none; /* Hide by default */
+        }
+        .test-form-row {
+            transition: all 0.3s ease;
+        }
 </style>
 
 <body>
@@ -77,6 +86,33 @@
                                                             <% } else { %>
                                                                 Not booked
                                                                 <% } %>
+                                </td>
+                                <td>
+                                    <button type="button" class="btn btn-primary" onclick="toggleForm('<%= driver._id %>')">
+                                        Update
+                                    </button>
+                                </td>
+                            </tr>
+                            <tr class="test-form-row">
+                                <td colspan="5">
+                                    <div id="form-<%= driver._id %>" class="hidden-form">
+                                        <form action="/examiner/updateResult/<%= driver._id %>" method="POST">
+                                            <input type="hidden" name="driverId" value="<%= driver._id %>">
+                        
+                                            <div class="form-group mb-2">
+                                                <label for="comments-<%= driver._id %>">Examiner Comments:</label>
+                                                <textarea id="comments-<%= driver._id %>" name="testComments" rows="3" class="form-control"><%= driver.testComments || '' %></textarea>
+                                            </div>
+                        
+                                            <div class="form-group mb-2" >
+                                                <label>Test Result:</label><br />
+                                                <input type="radio" name="testPassed" value="true" <%= driver.testPassed === true ? 'checked' : '' %> required> Pass
+                                                <input type="radio" name="testPassed" value="false" <%= driver.testPassed === false ? 'checked' : '' %>> Fail
+                                            </div>
+                                            
+                                            <button type="submit" class="btn btn-primary">Submit Result</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                             <% }) %>
