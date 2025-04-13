@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Drive test</title>
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet"
+        type="text/css" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800"
+        rel="stylesheet" type="text/css" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
+</head>
+<style>
+    .app_redio input {
+        width: 20px;
+    }
+</style>
+<body>
+    <!-- Navigation-->
+    <%- include('layouts/navbar'); -%>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('img/test-bg.jpg')"></header>
+        <!-- Main Content-->
+        <div class="testForm">
+            <h1>Create Appointment Slots</h1>
+            <fieldset>
+                <!-- <% if(errors != null && errors.length > 0){ %>
+                    <ul class="list-group"></ul>
+                    <% for (var i = 0; i < errors.length; i++) { %>
+                        <li class="list-group-item list-group-item-danger"><%= errors[i] %></li>
+                    <% } %>
+                    </ul>
+                <% } %> -->
+
+                <% if(errors != null && errors.length > 0){ %>
+                    <ul class="list-group">
+                    <% for (var i = 0; i < errors.length; i++) { %>
+                        <li class="list-group-item list-group-item-danger"><%= errors[i] %></li>
+                    <% } %>
+                    </ul>
+                <% } %>
+                
+                
+                <form id="postAppointmentForm" action="/admin/store" method="POST">
+                    <div class="form-group">
+                        <label for="date">Date:</label>
+                        <input type="date" name="date" id="date" class="form-control" value="<%= date %>" required />
+                        <br>
+
+                        <!-- <label>Time Slot Available:</label>
+                        <div class="app_redio">
+                            <input type="radio" id="timeSlotAvailable" name="isTimeSlotAvailable" value="true" checked required>
+                            <label for="timeSlotAvailable">True</label>
+                            <input type="radio" id="timeSlotUnAvailable" name="isTimeSlotAvailable" value="false">
+                            <label for="timeSlotUnAvailable">False</label>
+                        </div> 
+                        <br> -->
+
+                        <label for="time">Selected Time:</label>
+                        <input type="text" id="selectedTime" name="time" class="form-control" value="<%= time %>" readonly required />
+                        <br>
+
+                        <div id="timeButtons" class="form-group">
+                            <!-- Time slot buttons will be generated here -->
+                        </div>
+                        <br>
+                        <button type="submit" class="formButton" style="width: 100%;">Add Slot</button>
+                    </div>
+                </form>
+
+            </fieldset>
+
+            <hr>
+<div class="container mt-5">
+    <h2 class="text-center">Pass/Fail Candidate List</h2>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Driver Name</th>
+                <th>License No</th>
+                <th>Test Result</th>
+                <th>Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (candidates && candidates.length > 0) { %>
+                <% candidates.forEach(driver => { %>
+                    <tr>
+                        <td><%= driver.firstname %> <%= driver.lastname %></td>
+                        <td><%= driver.LicenseNo %></td>
+                        <td>
+                            <% if (driver.testPassed === true) { %>
+                                <span style="color: green;">PASS</span>
+                            <% } else { %>
+                                <span style="color: red;">FAIL</span>
+                            <% } %>
+                        </td>
+                        <td><%= driver.testComment %></td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="4" class="text-center">No Pass/Fail results available yet.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+</div>
+
+        </div>
+        <!-- Footer-->
+        <%- include('layouts/footer'); -%>
+            <!-- script-->
+            <%- include('layouts/scripts'); -%>
+</body>
+
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Sign up</title>
+        <link rel="icon" type="image/x-icon" href=/public/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="/css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Navigation-->
+        <%- include('layouts/navbar'); -%>
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('/img/home-bg.jpg')"></header>
+        <!-- Post Content-->
+        <div class="testForm">
+            <h1>Sign up</h1>
+            <% if (errors && errors.length > 0) { %>
+                <ul style="list-style: none; margin: 0; padding: 0;">
+                    <% errors.forEach(error => { %>
+                        <li class="alert alert-danger" ><%= error %></li>
+                    <% }) %>
+                </ul>
+            <% } %>
+            <form id="contactForm" action="/users/signUp" method="POST" enctype="multipart/form-data">
+                <div class="inputGroup">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="inputGroup">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <div class="inputGroup">
+                    <label for="rePassword">Repeated Password</label>
+                    <input type="password" id="rePassword" name="rePassword" placeholder="Repeated your password" required>
+                </div>
+                <div class="inputGroup">
+                    <label for="userType">UserType</label>
+                    <select name="userType" id="userType">
+                        <option value="Driver">Driver</option>
+                        <option value="Examiner">Examiner</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                </div>
+                <button type="submit" class="login-button">submit</button>
+            </form>
+        </div>
+        <!-- Footer-->
+        <%- include('layouts/footer'); -%>
+        <!-- script-->
+        <%- include('layouts/scripts'); -%>
+    </body>
+
+
+    
+</html>
