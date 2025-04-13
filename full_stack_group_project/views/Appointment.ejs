@@ -87,6 +87,7 @@
             <tr>
                 <th>Driver Name</th>
                 <th>License No</th>
+                <th>Test Type</th>
                 <th>Test Result</th>
                 <th>Comment</th>
             </tr>
@@ -97,6 +98,7 @@
                     <tr>
                         <td><%= driver.firstname %> <%= driver.lastname %></td>
                         <td><%= driver.LicenseNo %></td>
+                        <td><%= driver.TestType %></td>
                         <td>
                             <% if (driver.testPassed === true) { %>
                                 <span style="color: green;">PASS</span>
