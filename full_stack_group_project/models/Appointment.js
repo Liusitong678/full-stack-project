@@ -7,8 +7,8 @@ const AppointmentSchema = new mongoose.Schema({
   time: { type: String, required: true }, // "9:00" 
   isTimeSlotAvailable: { type: Boolean, default: true },
   TestType: { type: String, enum: ['G', 'G2'] },
-  testResult: { type: String, enum: ['PASS', 'FAIL'], default: null }, // This field holds the test result
-  examinerComment: { type: String, default: null }
+  testResult: { type: String, enum: ['PASS', 'FAIL', 'PENDING'], default: 'PENDING' }, // This field holds the test result
+  examinerComment: { type: String, default: "default" }
 });
 
 AppointmentSchema.index({ date: 1, time: 1 }, { unique: true });
