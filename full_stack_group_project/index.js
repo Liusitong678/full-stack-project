@@ -74,8 +74,8 @@ app.use("*", (req,res,next) => {
 })
 
 //conntction to MongoDB
-mongoose.connect('mongodb+srv://admin:admin@greeshmacluster.l5bhd.mongodb.net/driving_app_db?retryWrites=true&w=majority&appName=GreeshmaCluster')
-
+// mongoose.connect('mongodb+srv://admin:admin@greeshmacluster.l5bhd.mongodb.net/driving_app_db?retryWrites=true&w=majority&appName=GreeshmaCluster')
+mongoose.connect('mongodb+srv://admin:admin@cluster0.cbslt.mongodb.net/drive_test?retryWrites=true&w=majority&appName=Cluster0')
 //request handlers(get, post, put)
 app.get('/', dashboardController)
 
